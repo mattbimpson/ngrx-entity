@@ -4,6 +4,8 @@ import { createReducer, on } from '@ngrx/store';
 
 import { setProducts, createProduct, updateProduct, deleteProduct } from './actions';
 
+export const productFeature = 'product';
+
 export interface IProductState extends EntityState<IProduct>{}
 
 export const adapter: EntityAdapter<IProduct> = createEntityAdapter<IProduct>();
@@ -18,3 +20,7 @@ export const reducer = createReducer(
   on(updateProduct, (state, action) => adapter.updateOne(action.update, state)),
   on(deleteProduct, (state, action) => adapter.removeOne(action.product.id, state))
 );
+
+export const {
+  selectAll
+} = adapter.getSelectors();
